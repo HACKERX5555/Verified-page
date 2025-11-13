@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Email Verified | SplitShare</title>
+  <style>
+    :root {
+      --bg1: #dbeafe;
+      --bg2: #eff6ff;
+      --card-bg: rgba(255, 255, 255, 0.7);
+      --accent: #007aff;
+      --text: #0f172a;
+      --text-light: #64748b;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+        "Inter", "Segoe UI", Roboto, sans-serif;
+    }
+
+    html, body {
+      margin: 0;
+      height: 100%;
+      overflow: hidden;
+      background: linear-gradient(160deg, var(--bg1), var(--bg2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 1000px;
+    }
+
+    /* Background floating blobs */
+    .blob {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.5;
+      animation: float 12s infinite ease-in-out alternate;
+    }
+
+    .blob:nth-child(1) {
+      background: #60a5fa;
+      top: -60px;
+      left: -60px;
+      animation-delay: 0s;
+    }
+    .blob:nth-child(2) {
+      background: #a5b4fc;
+      bottom: -80px;
+      right: -80px;
+      animation-delay: 4s;
+    }
+
+    @keyframes float {
+      from { transform: translateY(0px) scale(1); }
+      to { transform: translateY(40px) scale(1.1); }
+    }
+
+    .card {
+      position: relative;
+      backdrop-filter: blur(30px) saturate(180%);
+      -webkit-backdrop-filter: blur(30px) saturate(180%);
+      background: var(--card-bg);
+      border-radius: 24px;
+      padding: 44px 36px 50px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 420px;
+      animation: fadeIn 1s ease both;
+      transform: translateY(10px);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(40px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .brand {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: var(--accent);
+      margin-bottom: 16px;
+      animation: fadeSlideDown 0.8s ease both;
+    }
+
+    @keyframes fadeSlideDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .checkmark {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      animation: pop 0.5s ease forwards 0.3s;
+    }
+
+    @keyframes pop {
+      from { transform: scale(0.3); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .checkmark svg {
+      width: 42px;
+      height: 42px;
+      stroke: white;
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+      stroke-dasharray: 60;
+      stroke-dashoffset: 60;
+      animation: draw 0.6s ease forwards 0.8s;
+    }
+
+    @keyframes draw {
+      to { stroke-dashoffset: 0; }
+    }
+
+    h1 {
+      margin: 10px 0 6px;
+      font-size: 22px;
+      color: var(--text);
+    }
+
+    p {
+      margin: 0;
+      font-size: 15px;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+
+    button {
+      margin-top: 30px;
+      padding: 12px 26px;
+      border: none;
+      border-radius: 14px;
+      background: var(--accent);
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.25s ease;
+      box-shadow: 0 6px 20px rgba(0, 122, 255, 0.3);
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0, 122, 255, 0.4);
+    }
+
+    .small {
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--text-light);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg1: #0f172a;
+        --bg2: #1e293b;
+        --card-bg: rgba(30, 41, 59, 0.6);
+        --text: #f8fafc;
+        --text-light: #94a3b8;
+      }
+      .blob:nth-child(1) { background: #2563eb; }
+      .blob:nth-child(2) { background: #6366f1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="blob"></div>
+  <div class="blob"></div>
+
+  <div class="card">
+    <div class="brand">SplitShare</div>
+    <div class="checkmark">
+      <svg viewBox="0 0 52 52">
+        <path d="M14 27l7 7 17-17"></path>
+      </svg>
+    </div>
+    <h1>Email Verified!</h1>
+    <p>Your email has been successfully verified.<br>You can now close this page.</p>
+    <button id="closeBtn">Close this Page</button>
+    <div class="small">Thanks for confirming your SplitShare account ❤️</div>
+  </div>
+
+  <script>
+    document.getElementById("closeBtn").addEventListener("click", () => {
+      try { window.close(); } catch (e) {}
+      location.href = "about:blank";
+    });
+  </script>
+</body>
+</html>
